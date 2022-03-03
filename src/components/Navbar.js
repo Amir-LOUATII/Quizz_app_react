@@ -12,12 +12,14 @@ const Navbar = () => {
     }
   }
   useEffect(() => {
+    if (window.localStorage.getItem("theme")) {
+      setTheme(window.localStorage.getItem("theme"));
+    } else setTheme("light-mode");
+  }, []);
+  useEffect(() => {
     window.localStorage.setItem("theme", theme);
     document.documentElement.className = theme;
   }, [theme]);
-  useEffect(() => {
-    setTheme(window.localStorage.getItem("theme"));
-  }, []);
   return (
     <header>
       <div className="container">

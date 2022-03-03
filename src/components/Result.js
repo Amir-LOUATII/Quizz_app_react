@@ -9,7 +9,6 @@ const Result = () => {
     setScore(0);
     startSetting();
     setShowResult(false);
-    console.log(showResult);
   }
   const { score, numberOfQuestions } = useGlobalContext();
   return (

@@ -38,7 +38,7 @@ body {
 
 .light-mode {
   --primiry-color: white;
-  --secondary-color: #f1f5f8;
+  --secondary-color: #f4f4f4;
   --text-header-color: hsl(0, 0%, 52%);
   --text-color: black;
 }
@@ -110,6 +110,7 @@ header .container div span:hover {
   padding: 1rem;
   background-color: var(--primiry-color);
   width: 50%;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25), -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 767px) {
