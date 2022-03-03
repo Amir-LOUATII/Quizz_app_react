@@ -12,8 +12,8 @@ const Navbar = () => {
     }
   }
   useEffect(() => {
-    document.documentElement.className = theme;
     window.localStorage.setItem("theme", theme);
+    document.documentElement.className = theme;
   }, [theme]);
   useEffect(() => {
     setTheme(window.localStorage.getItem("theme"));
