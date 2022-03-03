@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdDarkMode } from "react-icons/md";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(window.localStorage.getItem("theme"));
+  const [theme, setTheme] = useState();
 
   function clickHandler() {
     if (theme === "light-mode") {
@@ -15,6 +15,9 @@ const Navbar = () => {
     document.documentElement.className = theme;
     window.localStorage.setItem("theme", theme);
   }, [theme]);
+  useEffect(() => {
+    setTheme(window.localStorage.getItem("theme"));
+  }, []);
   return (
     <header>
       <div className="container">
