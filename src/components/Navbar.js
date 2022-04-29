@@ -16,6 +16,7 @@ const Navbar = () => {
       setTheme(window.localStorage.getItem("theme"));
     } else setTheme("light-mode");
   }, []);
+  
   useEffect(() => {
     window.localStorage.setItem("theme", theme);
     document.documentElement.className = theme;
