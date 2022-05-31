@@ -2,7 +2,7 @@ const settingReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE_AMOUNT":
       let newAmount = action.payload;
-      if (newAmount < 1) {
+      if (newAmount && newAmount < 1) {
         newAmount = 1;
       }
 
