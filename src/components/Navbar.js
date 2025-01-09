@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// path/to/your/Navbar.js
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { MdDarkMode } from "react-icons/md";
 
 const Navbar = () => {
@@ -11,25 +12,26 @@ const Navbar = () => {
       setTheme("light-mode");
     }
   }
-  useEffect(() => {
-    if (window.localStorage.getItem("theme")) {
-      setTheme(window.localStorage.getItem("theme"));
-    } else setTheme("light-mode");
+
+  useLayoutEffect(() => {
+    const savedTheme = window.localStorage.getItem("theme");
+    setTheme(savedTheme ? savedTheme : "light-mode");
   }, []);
-  
+
   useEffect(() => {
     window.localStorage.setItem("theme", theme);
     document.documentElement.className = theme;
   }, [theme]);
+
   return (
-    <header>
+    <header className="navbar">
       <div className="container">
         <div className="logo">
           Quiz<span>App</span>
         </div>
-        <div onClick={clickHandler}>
-          <MdDarkMode />
-          <span>Dark Mode</span>
+        <div className="theme-toggle" onClick={clickHandler}>
+          <MdDarkMode className="theme-icon" />
+          <span className="theme-text">Toggle Dark Mode</span>
         </div>
       </div>
     </header>

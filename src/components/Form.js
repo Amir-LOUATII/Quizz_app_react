@@ -24,7 +24,7 @@ function Form() {
             e.preventDefault();
           }}
         >
-          <h1>Setup Quiz</h1>
+          <h1 className="form-title">Setup Quiz</h1>
           <div className="form-control">
             <label htmlFor="number">Number Of Questions</label>
             <input

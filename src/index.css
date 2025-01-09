@@ -37,30 +37,40 @@ body {
   }
 }
 
+/* path/to/your/styles.css */
 .light-mode {
-  --primiry-color: white;
-  --secondary-color: #f4f4f4;
-  --text-header-color: hsl(0, 0%, 52%);
-  --text-color: black;
+  --primary-color: #4CAF50;
+  --secondary-color: #FFC107;
+  --text-header-color: #212121;
+  --text-color: #333333;
+  --background-color: #FFFFFF;
+  --shape-background: #F1F1F1;
+  --tertiary-color: #BDBDBD;
+  --primary-hover: #388E3C;
+  --secondary-hover: #FFA000;
 }
 
 .dark-mode {
-  --primiry-color: hsl(207, 26%, 17%);
-  --secondary-color: hsl(209, 23%, 22%);
-  --text-color: hsl(0, 0%, 100%);
-  --text-header-color: hsl(0, 0%, 100%);
+  --primary-color: #1B5E20;
+  --secondary-color: #FF8F00;
+  --text-header-color: #E0E0E0;
+  --text-color: #FFFFFF;
+  --background-color: #121212;
+  --shape-background: #1E1E1E;
+  --tertiary-color: #757575;
+  --primary-hover: #004D40;
+  --secondary-hover: #FF6F00;
 }
+
 
 /* components */
 /* start navbar  */
 header {
   width: 100%;
-  background-color: var(--primiry-color);
+  background-color: var(--shape-background);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  padding: 20px 15px;
 
-  height: 70px;
 }
 
 header .container {
@@ -75,28 +85,53 @@ header .container .logo {
   color: var(--text-header-color);
 }
 
-header .container svg {
-  margin-top: 10px;
-  margin-right: 5px;
-  color: var(--text-header-color);
+.navbar {
+  background-color: var(--shape-background);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-header .container div {
-  color: var(--text-header-color);
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.logo span {
+  color: var(--secondary-color);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
-header .container div span {
-  margin-bottom: 10px;
+.theme-toggle:hover {
+  color: var(--secondary-color);
 }
 
-header .container div span:hover {
-  text-decoration: underline;
+.theme-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.theme-text {
+  font-size: 1rem;
 }
 /* end navbar */
 /* start form  */
 .section {
   padding: 1rem 15px;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   height: 100vh;
 }
 
@@ -109,11 +144,16 @@ header .container div span:hover {
   margin-top: 5rem;
   color: var(--text-color);
   padding: 1rem;
-  background-color: var(--primiry-color);
+  background-color: var(--shape-background);
   width: 50%;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25), -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
-
+.form-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
 @media (max-width: 767px) {
   .form {
     width: 100%;
@@ -136,7 +176,7 @@ header .container div span:hover {
 }
 .form-input {
   border: none;
-  background: var(--secondary-color);
+  background: var(--background-color);
   font-size: 1rem;
   padding: 0.25rem 0.5rem;
   width: 100%;
@@ -152,12 +192,19 @@ header .container div span:hover {
 .submit-btn {
   width: 100%;
   margin-top: 3rem;
-  background-color: var(--secondary-color);
+  background-image: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); 
   padding: 1rem 0.5rem;
   border: none;
   font-size: 1.25rem;
-  color: var(--text-color);
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight:bold;
+}
+
+.submit-btn:hover {
+  background-image: linear-gradient(90deg, var(--primary-hover), var(--secondary-hover)); 
+  transform: scale(1.05); 
 }
 /* end form  */
 /* start quiz component */
@@ -166,7 +213,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
 }
 
 /*
@@ -210,8 +257,8 @@ start Loading component
 .quiz {
   width: 60%;
   width: 70%;
-  margin: 4rem auto;
-  background-color: var(--primiry-color);
+  margin: 1rem auto;
+  background-color: var(--primary-color);
   border-radius: var(--radius);
   padding: 3rem;
 }
