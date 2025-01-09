@@ -1,5 +1,6 @@
 import React from "react";
 import { useGlobalContext } from "../context/context";
+import { useNavigate } from "react-router";
 
 function Form() {
   const {
@@ -11,13 +12,13 @@ function Form() {
     fetchQuestions,
   } = useGlobalContext();
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     endSetting();
-    fetchQuestions();
+    fetchQuestions().then(() => navigate("/quiz"));
   };
-
+  const navigate = useNavigate();
   return (
-    <section className="section">
+    <section className="game-container">
       <form
         className="form"
         onSubmit={(e) => {
@@ -89,14 +90,16 @@ function Form() {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="button"
-          className="submit-btn"
-          onClick={clickHandler}
-          aria-label="Start the quiz"
-        >
-          Start Quiz
-        </button>
+        <div className="form-footer">
+          <button
+            type="button"
+            className="btn"
+            onClick={clickHandler}
+            aria-label="Start the quiz"
+          >
+            Start Quiz
+          </button>
+        </div>
       </form>
     </section>
   );

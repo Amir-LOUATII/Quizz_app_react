@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import settingReducer from "./settingReducer";
 
 const AppContext = createContext();
@@ -7,21 +13,27 @@ const initialSetting = {
   category: 21,
   difficulty: "easy",
   amount: 10,
-  currentQuestionIndex: 0,
 };
 
 const AppContextProvider = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [questions, setQuestion] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [gaveUp, setGaveUp] = useState(false);
+  const [questions, setQuestion] = useState(
+    JSON.parse(window.sessionStorage.getItem("questions") || "[]")
+  );
+
   const [isError, setIsError] = useState(false);
-  const [score, setScore] = useState(0);
-  const [numberOfQuestions, setNumberOfQuestions] = useState(0);
+  const [score, setScore] = useState(
+    +window.sessionStorage.getItem("score") || 0
+  );
   const [showResult, setShowResult] = useState(false);
   const [settingState, dispatchSetting] = useReducer(
     settingReducer,
     initialSetting
   );
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(
+    +window.sessionStorage.getItem("currentIndex") || 0
+  );
   const changeAmount = (value) => {
     dispatchSetting({ type: "CHANGE_AMOUNT", payload: value });
   };
@@ -45,7 +57,7 @@ const AppContextProvider = (props) => {
   function fetchQuestions() {
     setIsLoading(true);
     const url = `https://opentdb.com/api.php?amount=${settingState.amount}&category=${settingState.category}&difficulty=${settingState.difficulty}`;
-    fetch(url)
+    return fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
         const data = responseData.results.map((item) => {
@@ -62,12 +74,10 @@ const AppContextProvider = (props) => {
         });
 
         setQuestion(data);
-        setNumberOfQuestions(data.length);
-        setIsLoading(false);
+        window.sessionStorage.setItem("questions", JSON.stringify(data));
       })
       .catch((err) => {
         setIsError(true);
-        console.log(err);
       })
       .finally(setIsLoading(false));
   }
@@ -83,6 +93,37 @@ const AppContextProvider = (props) => {
   }
   function addPoint() {
     setScore((prevState) => +prevState + 1);
+  }
+
+  function isFinished() {
+    return currentQuestionIndex === questions.length - 1;
+  }
+
+  function givingUp() {
+    setGaveUp(true);
+  }
+
+  function reset() {
+    startSetting();
+    setScore(0);
+    setCurrentQuestionIndex(0);
+    setQuestion([]);
+    window.sessionStorage.removeItem("questions");
+    window.sessionStorage.removeItem("currentIndex");
+    window.sessionStorage.removeItem("score");
+  }
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      "currentIndex",
+      JSON.stringify(currentQuestionIndex)
+    );
+  }, [currentQuestionIndex]);
+  useEffect(() => {
+    window.sessionStorage.setItem("score", JSON.stringify(score));
+  }, [currentQuestionIndex]);
+
+  function numberOfQuestions() {
+    return questions?.length || 0;
   }
   return (
     <AppContext.Provider
@@ -103,6 +144,10 @@ const AppContextProvider = (props) => {
         startSetting,
         getNextQuestion,
         currentQuestionIndex,
+        isFinished,
+        gaveUp,
+        givingUp,
+        reset,
       }}
     >
       {props.children}

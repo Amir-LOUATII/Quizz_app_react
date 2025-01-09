@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Answer from "./Answer";
 import { useGlobalContext } from "../context/context";
+import { useNavigate } from "react-router";
 
 function Questions() {
-  const { getNextQuestion, questions, currentQuestionIndex } =
+  const { getNextQuestion, questions, currentQuestionIndex, givingUp } =
     useGlobalContext();
   const [isAnswered, setIsAnswered] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     let counter = setTimeout(() => {
       if (isAnswered) {
         getNextQuestion();
+        if (currentQuestionIndex === questions?.length - 1) {
+          navigate("/result");
+        }
       }
     }, 2000);
     return () => clearTimeout(counter);
@@ -36,9 +40,29 @@ function Questions() {
           );
         })}
       </div>
-      <button className="skip" onClick={getNextQuestion}>
-        Skip
-      </button>
+      <div className="actions-container">
+        <button
+          className="btn skip-btn"
+          onClick={() => {
+            getNextQuestion();
+            if (currentQuestionIndex === questions?.length - 1) {
+              navigate("/result");
+            }
+          }}
+        >
+          Skip
+        </button>
+
+        <button
+          className="btn give-up-btn"
+          onClick={() => {
+            givingUp();
+            navigate("/result");
+          }}
+        >
+          Give Up
+        </button>
+      </div>
     </div>
   );
 }
