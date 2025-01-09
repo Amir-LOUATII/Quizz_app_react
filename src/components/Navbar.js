@@ -27,7 +27,7 @@ const Navbar = () => {
     <header className="navbar">
       <div className="container">
         <div className="logo">
-          Quiz<span>App</span>
+          QuizApp
         </div>
         <div className="theme-toggle" onClick={clickHandler}>
           <MdDarkMode className="theme-icon" />

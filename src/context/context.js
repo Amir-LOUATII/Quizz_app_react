@@ -1,11 +1,13 @@
 import { createContext, useContext, useReducer, useState } from "react";
 import settingReducer from "./settingReducer";
+
 const AppContext = createContext();
-const intialSetting = {
+const initialSetting = {
   setting: true,
   category: 21,
   difficulty: "easy",
   amount: 10,
+  currentQuestionIndex: 0,
 };
 
 const AppContextProvider = (props) => {
@@ -17,9 +19,9 @@ const AppContextProvider = (props) => {
   const [showResult, setShowResult] = useState(false);
   const [settingState, dispatchSetting] = useReducer(
     settingReducer,
-    intialSetting
+    initialSetting
   );
-
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const changeAmount = (value) => {
     dispatchSetting({ type: "CHANGE_AMOUNT", payload: value });
   };
@@ -69,6 +71,19 @@ const AppContextProvider = (props) => {
       })
       .finally(setIsLoading(false));
   }
+
+  function getNextQuestion() {
+    if (
+      questions &&
+      questions.length > 0 &&
+      +currentQuestionIndex < +questions.length - 1
+    ) {
+      setCurrentQuestionIndex((prevState) => prevState + 1);
+    }
+  }
+  function addPoint() {
+    setScore((prevState) => +prevState + 1);
+  }
   return (
     <AppContext.Provider
       value={{
@@ -81,11 +96,13 @@ const AppContextProvider = (props) => {
         fetchQuestions,
         questions,
         score,
-        setScore,
+        addPoint,
         numberOfQuestions,
         showResult,
         setShowResult,
         startSetting,
+        getNextQuestion,
+        currentQuestionIndex,
       }}
     >
       {props.children}

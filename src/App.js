@@ -10,9 +10,11 @@ function App() {
   return (
     <>
       <Navbar />
-      {setting && <Form />}
-      {!setting && <Quiz />}
-      {showResult && <Result />}
+      <section id="game-container">
+        {setting && <Form />}
+        {!setting && <Quiz />}
+        {showResult && <Result />}
+      </section>
     </>
   );
 }

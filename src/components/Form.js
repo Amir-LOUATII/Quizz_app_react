@@ -15,64 +15,89 @@ function Form() {
     endSetting();
     fetchQuestions();
   };
+
   return (
     <section className="section">
-      <div className="container">
-        <form
-          className="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <h1 className="form-title">Quiz Setup</h1>
+
+        {/* Number of Questions */}
+        <div className="form-control">
+          <label htmlFor="number" className="form-label">
+            Number of Questions
+          </label>
+          <input
+            type="number"
+            id="number"
+            name="number"
+            className="form-input"
+            value={amount}
+            onChange={(e) => changeAmount(e.target.value)}
+            placeholder="Enter number of questions"
+            aria-label="Enter the number of questions for the quiz"
+            min="1"
+          />
+        </div>
+
+        {/* Category */}
+        <div className="form-control">
+          <label htmlFor="category" className="form-label">
+            Select a Category
+          </label>
+          <select
+            id="category"
+            name="category"
+            className="form-input"
+            onChange={(e) => changeCategory(e.currentTarget.value)}
+            defaultValue=""
+            aria-label="Select quiz category"
+          >
+            <option value="" disabled>
+              Choose a category
+            </option>
+            <option value="21">Sports</option>
+            <option value="23">History</option>
+            <option value="24">Politics</option>
+          </select>
+        </div>
+
+        {/* Difficulty */}
+        <div className="form-control">
+          <label htmlFor="difficulty" className="form-label">
+            Select Difficulty Level
+          </label>
+          <select
+            id="difficulty"
+            name="difficulty"
+            className="form-input"
+            onChange={(e) => changeDifficulty(e.currentTarget.value)}
+            defaultValue=""
+            aria-label="Select difficulty level"
+          >
+            <option value="" disabled>
+              Choose difficulty level
+            </option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="button"
+          className="submit-btn"
+          onClick={clickHandler}
+          aria-label="Start the quiz"
         >
-          <h1 className="form-title">Setup Quiz</h1>
-          <div className="form-control">
-            <label htmlFor="number">Number Of Questions</label>
-            <input
-              type="number"
-              name="number"
-              id="number"
-              className="form-input"
-              value={amount}
-              onChange={(e) => {
-                changeAmount(e.target.value);
-              }}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="category">Category</label>
-            <select
-              name="category"
-              id="category"
-              className="form-input"
-              onChange={(e) => {
-                changeCategory(e.currentTarget.value);
-              }}
-            >
-              <option value="21">Sports</option>
-              <option value="23">History</option>
-              <option value="24">Politic</option>
-            </select>
-          </div>
-          <div className="form-control">
-            <label htmlFor="difficulty">Select Difficulty</label>
-            <select
-              name="difficulty"
-              id="difficulty"
-              className="form-input"
-              onChange={(e) => {
-                changeDifficulty(e.currentTarget.value);
-              }}
-            >
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-          <button className="submit-btn" onClick={clickHandler}>
-            Start
-          </button>
-        </form>
-      </div>
+          Start Quiz
+        </button>
+      </form>
     </section>
   );
 }
