@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Answer from "./Answer";
 import { useGlobalContext } from "../context/context";
 import { useNavigate } from "react-router";
-
+import DOMPurify from "dompurify";
+import { configDomPurify } from "../config/domPurifyConfig";
 function Questions() {
   const { getNextQuestion, questions, currentQuestionIndex, givingUp } =
     useGlobalContext();
@@ -22,9 +23,18 @@ function Questions() {
 
   const question =
     questions && questions instanceof Array && questions[currentQuestionIndex];
+  const cleanQuestion =
+    questions && questions instanceof Array && questions[currentQuestionIndex]
+      ? DOMPurify.sanitize(
+          questions[currentQuestionIndex]?.question,
+          configDomPurify
+        )
+          .replace(/classname/g, "class")
+          .replace(/className/g, "class")
+      : "";
   return (
     <div>
-      <h2>{question?.question}</h2>
+      <h2 dangerouslySetInnerHTML={{ __html: cleanQuestion }}></h2>
       <div className="btn-container" key={question?.question}>
         {question?.answers?.map((item) => {
           return (
