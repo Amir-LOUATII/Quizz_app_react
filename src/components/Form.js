@@ -58,9 +58,6 @@ function Form() {
             defaultValue=""
             aria-label="Select quiz category"
           >
-            <option value="" disabled>
-              Choose a category
-            </option>
             <option value="21">Sports</option>
             <option value="23">History</option>
             <option value="24">Politics</option>
@@ -80,9 +77,6 @@ function Form() {
             defaultValue=""
             aria-label="Select difficulty level"
           >
-            <option value="" disabled>
-              Choose difficulty level
-            </option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
