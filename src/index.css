@@ -471,7 +471,7 @@ start Loading component
 .actions-container {
   margin-top: 1rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 /* end quiz component */
@@ -529,28 +529,36 @@ h1 {
 .try-again {
   color: #ffa500;
 }
+.result-container .score {
+  padding: 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
 
+.result-container .score-excellent {
+  border-color: green;
+}
+
+.result-container .score-good {
+  border-color: blue;
+}
+
+.result-container .score-fair {
+  border-color: orange;
+}
+
+.result-container .score-poor {
+  border-color: red;
+}
+
+.result-container .score-gave-up {
+  border-color: gray;
+}
 .result-message {
   margin: 1rem 0;
   font-size: 1.2rem;
 }
 
-.back-home-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: #007bff; /* Blue for back home button */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.25rem;
-  margin-top: 1rem; /* Space between buttons */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.back-home-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05);
-}
 /* end result component  */
 
 .portfolio-footer {
@@ -567,6 +575,14 @@ h1 {
   font-weight: 400;
   line-height: 1.5;
   color: var(--text-color);
+}
+.portfolio-footer a {
+  margin: 0.5rem 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+  display: inline-block;
 }
 
 .not-found,

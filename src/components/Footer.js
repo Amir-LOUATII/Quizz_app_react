@@ -6,9 +6,16 @@ const Footer = () => {
       <div className="container">
         <p>
           © {new Date().getFullYear()} QuizMaster | Built by
-          <strong>Amir Louati </strong>
+          <strong>
+            <a
+              href="https://portfolio-amir-louati.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Amir Louati
+            </a>
+          </strong>
         </p>
-        <p>Test your knowledge and enjoy learning something new every day!</p>
       </div>
     </footer>
   );
