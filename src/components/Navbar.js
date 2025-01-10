@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { Link } from "react-router-dom";
 let first = true;
 const Navbar = () => {
   const [theme, setTheme] = useState(
@@ -31,7 +32,11 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <div className="container">
-        <div className="logo">QuizMaster</div>
+        <div>
+          <Link to="/" className="logo">
+            QuizMaster
+          </Link>
+        </div>
         <div className="theme-toggle" onClick={clickHandler}>
           {theme === "dark-mode" ? <MdDarkMode /> : <MdLightMode />}
         </div>
