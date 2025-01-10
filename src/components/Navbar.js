@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <div className="container">
-        <div className="logo">QuizApp</div>
+        <div className="logo">QuizMaster</div>
         <div className="theme-toggle" onClick={clickHandler}>
           {theme === "dark-mode" ? <MdDarkMode /> : <MdLightMode />}
         </div>

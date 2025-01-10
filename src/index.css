@@ -73,7 +73,8 @@ main {
 /* components */
 /*start common classes*/
 .btn {
-  width: fit-content;
+  min-width: 120px;
+  max-width: 100%;
   min-width: 100px;
   background-image: linear-gradient(
     90deg,
@@ -88,6 +89,7 @@ main {
   transition: background-color 0.3s ease, transform 0.2s ease;
   font-weight: bold;
   border-radius: 8px;
+  margin: 0.35rem;
 }
 
 .btn:hover {
@@ -428,6 +430,7 @@ start Loading component
   cursor: pointer;
   padding: 0.5rem 0;
   transition: 0.3s;
+  border-radius: 4px;
 }
 .answer-btn.correct {
   background-color: #4caf50;

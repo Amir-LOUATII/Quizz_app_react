@@ -4,11 +4,19 @@ import Quiz from "./components/Quiz";
 import Result from "./components/Result";
 import Welcome from "./components/Welcome";
 import HomePage from "./pages/HomePage";
+import ErrorPage from "./pages/ErrorPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { ErrorBoundary } from "react-error-boundary";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <HomePage />
+      </ErrorBoundary>
+    ),
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Welcome /> },
       {
@@ -24,6 +32,10 @@ const router = createBrowserRouter([
         element: <Result />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
