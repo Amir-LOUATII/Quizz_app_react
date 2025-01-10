@@ -9,7 +9,7 @@ const NotFoundPage = () => {
   };
 
   const handleGoHome = () => {
-    navigate.push("/");
+    navigate("/");
   };
 
   return (

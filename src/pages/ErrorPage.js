@@ -5,7 +5,7 @@ const ErrorPage = ({ message }) => {
   const navigate = useNavigate();
 
   const handleGoHome = () => {
-    navigate.push("/");
+    navigate("/");
   };
 
   return (
