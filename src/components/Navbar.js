@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-
+let first = true;
 const Navbar = () => {
   const [theme, setTheme] = useState(
     window.localStorage.getItem("theme") || "dark-theme"
@@ -15,8 +15,17 @@ const Navbar = () => {
   }
 
   useLayoutEffect(() => {
-    window.localStorage.getItem("theme", theme);
-    document.documentElement.className = theme || "dark-theme";
+    const storedTheme = window.localStorage.getItem("theme") || "dark-theme";
+    setTheme(storedTheme);
+    document.documentElement.className = storedTheme;
+  }, []);
+
+  useEffect(() => {
+    if (!first) {
+      window.localStorage.setItem("theme", theme);
+      document.documentElement.className = theme;
+    }
+    first = false;
   }, [theme]);
 
   return (
