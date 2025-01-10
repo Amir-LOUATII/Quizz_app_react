@@ -15,7 +15,7 @@ const Navbar = () => {
   }
 
   useLayoutEffect(() => {
-    window.localStorage.setItem("theme", theme);
+    window.localStorage.getItem("theme", theme);
     document.documentElement.className = theme || "dark-theme";
   }, [theme]);
 
