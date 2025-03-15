@@ -44,8 +44,8 @@ const Result = () => {
 
   return (
     <div className="result-container">
-      <h1 className={percentage > 0 ? "success" : "try-again"}>
-        {percentage > 0 ? "Well Done!" : "Try Again!"}
+      <h1 className={percentage && !gaveUp > 0 ? "success" : "try-again"}>
+        {percentage && !gaveUp > 0 ? "Well Done!" : "Try Again!"}
       </h1>
       <p className="result-message">{resultMessage}</p>
       <p className={`score ${scoreClass}`}>{`Your score: ${percentage} %`}</p>
